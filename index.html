@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Türkiye Afet Haritası</title>
+<meta name="description" content="Ortaokul öğrencileri için etkileşimli Türkiye afet haritası. Hazırlayan: Hakan Er">
+<meta name="author" content="Hakan Er">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Lexend:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/map.css">
+<link rel="stylesheet" href="css/controls.css">
+<link rel="stylesheet" href="css/panel.css">
+<link rel="stylesheet" href="css/dialog.css">
+<link rel="stylesheet" href="css/scenes.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/art.css">
+<script defer src="js/data/geo.js"></script>
+<script defer src="js/data/regions.js"></script>
+<script defer src="js/data/hazards.js"></script>
+<script defer src="js/data/events.js"></script>
+<script defer src="js/data/faults.js"></script>
+<script defer src="js/data/province-facts.js"></script>
+<script defer src="js/data/glossary.js"></script>
+<script defer src="js/data/bag.js"></script>
+<script defer src="js/data/quiz.js"></script>
+<script defer src="js/data/magnitude.js"></script>
+<script defer src="js/art/icons.js"></script>
+<script defer src="js/art/scenes.js"></script>
+<script defer src="js/art/bag-icons.js"></script>
+<script defer src="js/core/util.js"></script>
+<script defer src="js/core/projection.js"></script>
+<script defer src="js/core/state.js"></script>
+<script defer src="js/map/build.js"></script>
+<script defer src="js/map/view.js"></script>
+<script defer src="js/map/input.js"></script>
+<script defer src="js/app/actions.js"></script>
+<script defer src="js/app/header.js"></script>
+<script defer src="js/app/panel.js"></script>
+<script defer src="js/features/maglab.js"></script>
+<script defer src="js/features/timeline.js"></script>
+<script defer src="js/features/quiz.js"></script>
+<script defer src="js/features/bag.js"></script>
+<script defer src="js/app/dialogs.js"></script>
+<script defer src="js/app/toast.js"></script>
+<script defer src="js/app/router.js"></script>
+<script defer src="js/main.js"></script>
+</head>
+<body>
+
+<div id="app" lang="tr">
+  <header class="band">
+    <div class="band-in">
+      <div class="brand">
+        <span id="logoBox"></span>
+        <div>
+          <h1>TÜRKİYE <b>AFET</b> HARİTASI</h1>
+          <div class="byline">Hazırlayan: <strong>Hakan Er</strong> · Ortaokul öğrencileri için</div>
+        </div>
+      </div>
+      <nav class="modes" aria-label="Bölümler">
+        <button type="button" data-mode="explore" data-ic="compass" aria-pressed="true">Keşfet</button>
+        <button type="button" data-mode="timeline" data-ic="clock" aria-pressed="false">Zaman Tüneli</button>
+        <button type="button" data-mode="quiz" data-ic="quiz" aria-pressed="false">Yarışma</button>
+        <button type="button" data-open="bag" data-ic="bag">Afet Çantası</button>
+        <button type="button" data-open="glossary" data-ic="book">Sözlük</button>
+        <button type="button" data-open="about" data-ic="info">Hakkında</button>
+        <button type="button" id="fsBtn" class="ibtn" aria-label="Tam ekran" title="Tam ekran"></button>
+      </nav>
+    </div>
+  </header>
+  <main class="stage">
+    <aside class="rail" aria-label="Harita katmanları">
+      <div class="rail-h">Harita katmanı</div>
+      <div class="hz-list" id="hzList"></div>
+      <div class="sos"><div class="big"><span id="sosIc"></span>112</div>Tüm acil durumlar için tek numara.</div>
+    </aside>
+    <section class="mapcol" aria-label="Harita">
+      <div class="maphead">
+        <div class="mh-title" id="mhTitle"></div>
+        <label class="search"><span id="searchIc"></span><input id="provSearch" list="provList" placeholder="İl ara (ad ya da plaka)" autocomplete="off" aria-label="İl ara"></label>
+        <datalist id="provList"></datalist>
+      </div>
+      <div class="mapwrap" id="mapwrap">
+        <svg id="map" role="img" aria-label="Türkiye afet haritası: 81 il, fay hatları ve afet olayları"></svg>
+        <div class="compass" id="compass"></div>
+        <div class="mapctl">
+          <button type="button" class="ibtn" id="zIn" aria-label="Yakınlaştır" title="Yakınlaştır"></button>
+          <button type="button" class="ibtn" id="zOut" aria-label="Uzaklaştır" title="Uzaklaştır"></button>
+          <button type="button" class="ibtn" id="zFit" aria-label="Türkiye'nin tamamını göster" title="Türkiye'nin tamamı"></button>
+        </div>
+        <div class="scalebar" id="scalebar"></div>
+        <div class="wm">Hakan Er · Türkiye Afet Haritası</div>
+        <div class="tip" id="tip" hidden></div>
+        <div class="toast" id="toast" hidden></div>
+      </div>
+      <div class="mapfoot" id="mapfoot"></div>
+    </section>
+    <aside class="panel" id="panel" aria-label="Bilgi paneli"></aside>
+  </main>
+  <footer class="band band-foot">
+    <div class="band-in"><span>© 2026 Hakan Er · Türkiye Afet Haritası · Eğitim amaçlı hazırlanmıştır.</span><span>Acil durumlarda <b>112</b></span></div>
+  </footer>
+</div>
+<div class="sr-only" id="live" aria-live="polite"></div>
+<dialog id="dlg" lang="tr" aria-labelledby="dlgTitle">
+  <div class="dlg-in">
+    <header class="dlg-h"><h2 id="dlgTitle"></h2><button type="button" class="ibtn" data-act="close" aria-label="Kapat"></button></header>
+    <div class="dlg-b" id="dlgBody"></div>
+  </div>
+</dialog>
+</body>
+</html>

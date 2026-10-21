@@ -1,0 +1,40 @@
+// Türkiye Afet Haritası · Afet sözlüğü
+'use strict';
+
+// ------------------------------------------------------------------ sözlük
+const GLOSS = [
+  ["Afet", "Toplumun normal yaşamını durduran, can ve mal kaybına yol açan doğa ya da insan kaynaklı olay."],
+  ["Tehlike ve risk", "Tehlike, zarar verebilecek bir olaydır (ör. deprem). Risk ise o tehlikenin bir yerde yol açabileceği zarardır. Depremi önleyemeyiz ama hazırlıkla riski azaltabiliriz."],
+  ["AFAD", "Afet ve Acil Durum Yönetimi Başkanlığı. Türkiye'de afetlere hazırlık, müdahale ve iyileştirme çalışmalarını yürüten kurum. 2009'da kuruldu."],
+  ["112", "Türkiye'de tüm acil durumlar için aranan tek numara: ambulans, itfaiye, polis, jandarma, AFAD ve orman yangını ihbarı."],
+  ["Levha", "Yer kabuğunu oluşturan, sürekli ve çok yavaş hareket eden dev parçalar."],
+  ["Fay", "Yer kabuğundaki kırık. Kırığın iki yanındaki bloklar bu kırık boyunca hareket eder."],
+  ["Fay hattı", "Bir fayın yeryüzündeki izi. Haritada kırmızı çizgilerle gösterilmiştir."],
+  ["Doğrultu atımlı fay", "Blokların yatay olarak birbirinin yanından kaydığı fay türü. Kuzey Anadolu ve Doğu Anadolu fayları bu türdendir."],
+  ["Normal fay", "Yer kabuğunun gerilmesiyle oluşan, bloklardan birinin aşağı kaydığı fay türü. Ege'deki faylar genellikle bu türdendir."],
+  ["Graben (çöküntü ovası)", "İki fay arasında çökmüş alçak alan. Gediz ve Büyük Menderes ovaları birer grabendir. Yükselmiş bloklara horst denir."],
+  ["Odak (hiposantr)", "Depremin yerin altında başladığı nokta."],
+  ["Merkez üssü (episantr)", "Odak noktasının yeryüzündeki tam üstü. Sarsıntı genellikle en güçlü burada hissedilir."],
+  ["Büyüklük (magnitüd)", "Depremde açığa çıkan enerjinin ölçüsü. Her deprem için tek bir değerdir."],
+  ["Şiddet", "Depremin bir yerde ne kadar güçlü hissedildiği ve ne kadar hasar verdiği. Yere göre değişir."],
+  ["Artçı sarsıntı", "Büyük bir depremden sonra aynı bölgede gelen daha küçük depremler. Günlerce, hatta aylarca sürebilir."],
+  ["Sismograf", "Yer sarsıntılarını ölçen ve kaydeden alet. Kaydına sismogram denir."],
+  ["P ve S dalgaları", "Depremde yayılan dalgalar. P dalgaları daha hızlıdır ve önce gelir. S dalgaları daha yavaştır ama daha çok sarsar."],
+  ["Zemin sıvılaşması", "Gevşek ve suya doygun zeminin deprem sırasında bir sıvı gibi davranması. Binalar devrilebilir ya da zemine gömülebilir."],
+  ["Tsunami", "Deniz tabanındaki ani hareketlerle oluşan dev dalgalar dizisi. Japonca “liman dalgası” demektir."],
+  ["Heyelan", "Eğimli yamaçlardaki toprak ve kaya kütlelerinin aşağı kayması; toprak kayması."],
+  ["Set gölü", "Bir vadinin önünün heyelan ya da lav gibi bir engelle kapanmasıyla oluşan göl. Uzungöl ve Van Gölü örnektir."],
+  ["Çığ", "Dik yamaçlarda biriken kar kütlesinin aniden ve hızla aşağı kayması."],
+  ["Kuraklık", "Bir bölgenin uzun süre normalden çok daha az yağış alması ve suyun azalması."],
+  ["Obruk", "Yer altındaki boşlukların tavanının çökmesiyle oluşan derin, çoğu zaman yuvarlak çukur."],
+  ["Magma ve lav", "Yerin derinliklerindeki erimiş kayaca magma, yeryüzüne çıktıktan sonra lav denir."],
+  ["Krater", "Volkanın tepesindeki çukur biçimli ağız."],
+  ["Yangın üçgeni", "Yangın için gereken üç şey: ısı, yakıt ve oksijen. Biri ortadan kalkınca yangın söner."],
+  ["Toplanma alanı", "Afetten sonra insanların güvenle toplanması için önceden belirlenmiş açık alan. Seninkini e-Devlet'ten öğrenebilirsin."],
+  ["Afet ve acil durum çantası", "Afetten sonraki ilk 72 saatte (3 gün) ihtiyaç duyacağın malzemeleri içeren çanta."],
+  ["Tatbikat", "Afet anında ne yapacağımızı önceden çalıştığımız deneme. Okul tatbikatları hayat kurtarır."],
+  ["Çök-Kapan-Tutun", "Deprem anında yapılması gereken hareket: Yere çök, başını ve enseni koruyarak sağlam bir masanın altına kapan, masanın ayağına tutun."],
+  ["Enlem ve boylam", "Dünya üzerindeki yerleri belirlemek için kullanılan hayalî çizgiler. Türkiye 36°–42° kuzey enlemleri ile 26°–45° doğu boylamları arasındadır."],
+  ["İklim değişikliği", "Dünyanın iklim düzenindeki uzun süreli değişim. Kuraklık, aşırı yağış ve orman yangınlarının artmasıyla ilişkilidir."],
+  ["DASK", "Doğal Afet Sigortaları Kurumu. 1999 depreminden sonra başlayan zorunlu deprem sigortasını yürütür."]
+];

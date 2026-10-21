@@ -1,0 +1,153 @@
+/* Türkiye Afet Haritası · Renk, yazı ve köşe değişkenleri; açık ve koyu tema */
+:root {
+  /* Düzen: koyu üst bant · sol raf (afet türleri) · ortada oyun-haritası tarzı Türkiye · sağda bilgi paneli.
+     Renk: mürekkep laciverti + işaret sarısı arayüz, 7 bölge için canlı parça renkleri, afet başına risk rampası.
+     Yazı: Bungee (tabela başlıkları) + Lexend (okunaklı gövde ve harita adları). */
+  --bg: #e7eef3;
+  --surface: #ffffff;
+  --surface-2: #f1f5f8;
+  --surface-3: #e1e9ef;
+  --ink: #13202b;
+  --ink-2: #435362;
+  --ink-3: #6b7a87;
+  --line: #d0dae2;
+  --band: #13202b;
+  --band-ink: #f3f6f8;
+  --band-ink-2: #a9b9c6;
+  --band-line: rgba(243, 246, 248, .18);
+  --signal: #ffc531;
+  --signal-ink: #13202b;
+  --signal-bg: #fff4cf;
+  --focus: #1b6fe0;
+  --safe: #0f8a4f;
+  --safe-2: #8fe0b2;
+  --safe-bg: #dff4e8;
+  --danger: #cc2a3f;
+  --danger-bg: #fde6e9;
+  --fact-bg: #fff6d8;
+  --fact-line: #f1dc8c;
+  --on-c: #ffffff;
+  --scrim: rgba(8, 16, 24, .55);
+  --shadow-1: 0 1px 2px rgba(19, 32, 43, .08), 0 6px 18px rgba(19, 32, 43, .09);
+  --plate-blue: #1d4fd6;
+  --paper: #fffdf6;
+  --paper-ink: #13202b;
+  --wm: rgba(19, 32, 43, .55);
+
+  /* harita */
+  --sea: #94d6ee;
+  --sea-deep: #58b0da;
+  --wave: rgba(255, 255, 255, .38);
+  --shallow: #d6f5fc;
+  --land-n: #ebe5d6;
+  --land-n-line: #cdc3ac;
+  --land: #f3efe4;
+  --inland: #e4e0d6;
+  --seam: #ffffff;
+  --edge: #5a6a78;
+  --shade: rgba(9, 38, 64, .24);
+  --outline: rgba(30, 44, 56, .7);
+  --lake: #8fd2ec;
+  --river: #3f9fd3;
+  --grid: #13202b;
+  --label: #13202b;
+  --halo: rgba(255, 255, 255, .94);
+  --label-n: #7f8892;
+  --sea-label: #1d6d97;
+  --fault: #e3242b;
+  --fault-case: rgba(255, 255, 255, .92);
+  --plate: #7b3fd0;
+
+  /* 7 coğrafi bölge */
+  --r-M: #9a7cf3;
+  --r-E: #23c2b4;
+  --r-A: #ff8c5a;
+  --r-I: #f5c443;
+  --r-K: #4ec270;
+  --r-D: #4a9cf1;
+  --r-G: #f26f9b;
+
+  /* afet rampaları: 1 düşük · 2 orta · 3 yüksek */
+  --deprem-1: #ffd3d8; --deprem-2: #ff7b88; --deprem-3: #d91f3a;
+  --sel-1: #cfeaff; --sel-2: #5aa8ff; --sel-3: #2259d6;
+  --heyelan-1: #f2dfc6; --heyelan-2: #d8a066; --heyelan-3: #9a5a26;
+  --cig-1: #e4e2ff; --cig-2: #a39cff; --cig-3: #5f4fe0;
+  --yangin-1: #ffe3b8; --yangin-2: #ffa23a; --yangin-3: #e8590c;
+  --kuraklik-1: #fff2b3; --kuraklik-2: #f5c724; --kuraklik-3: #b98800;
+  --tsunami-1: #cdf5ef; --tsunami-2: #42d4c4; --tsunami-3: #0b9a98;
+  --volkan-3: #c2185b;
+  --iller-3: #13202b;
+
+  /* sahne çizimleri */
+  --sky: #d7ecf8; --sky-2: #b6d8ee; --sky-storm: #c2ccd6; --sky-fire: #ffe0c2; --sky-dry: #fbefc9;
+  --cloud: #ffffff; --cloud-storm: #7b8995; --ground: #c9ab80; --ground-2: #a3845b; --dry: #dcbd8d;
+  --grass: #6aad4e; --tree: #2e7b48; --trunk: #7a5232; --wall: #fff3df; --roof: #cf4b31;
+  --water: #3a8ad1; --water-2: #79b6ea; --snow: #ffffff; --rock: #8b8378; --rock-2: #a8a094;
+  --smoke: #9aa2aa; --lava: #ff5a1e; --flame: #ff8a1c; --flame-2: #ffd23f; --sun: #ffc531;
+
+  --f-display: "Bungee", "Lexend", system-ui, sans-serif;
+  --f-body: "Lexend", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b131a; --surface: #131d27; --surface-2: #1a2632; --surface-3: #24323f;
+    --ink: #e8eef3; --ink-2: #a8b7c4; --ink-3: #7f8f9c; --line: #263542;
+    --band: #060b10; --band-ink: #eef3f7; --band-ink-2: #93a5b3; --band-line: rgba(238, 243, 247, .14);
+    --signal: #ffcf4d; --signal-ink: #0b131a; --signal-bg: #352d12; --focus: #79b2ff;
+    --safe: #3cc781; --safe-2: #1f6b43; --safe-bg: #12301f; --danger: #ff6474; --danger-bg: #3b161c;
+    --fact-bg: #2a2412; --fact-line: #4a3f1c; --on-c: #0b131a; --scrim: rgba(0, 0, 0, .62);
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 22px rgba(0, 0, 0, .35); --wm: rgba(232, 238, 243, .5);
+    --sea: #12365a; --sea-deep: #0a2238; --wave: rgba(140, 200, 240, .12); --shallow: #1f5d82;
+    --land-n: #1b252f; --land-n-line: #2b3743; --land: #2a3946; --inland: #26323d; --seam: #0b131a;
+    --edge: #020508; --shade: rgba(0, 0, 0, .5); --outline: rgba(150, 175, 195, .55); --lake: #14406a; --river: #3a8cc0;
+    --grid: #e8eef3; --label: #ffffff; --halo: rgba(8, 14, 20, .92); --label-n: #6f808e; --sea-label: #6cb7e0;
+    --fault: #ff4b3e; --fault-case: rgba(8, 14, 20, .92); --plate: #b892ff;
+    --r-M: #8466e6; --r-E: #17a89b; --r-A: #ef7442; --r-I: #e3ae2a; --r-K: #33a85a; --r-D: #3784dc; --r-G: #de5a88;
+    --deprem-1: #4a2228; --deprem-2: #a3303f; --deprem-3: #ff5468;
+    --sel-1: #18324f; --sel-2: #2c62ad; --sel-3: #5ea4ff;
+    --heyelan-1: #3a2c1e; --heyelan-2: #80562e; --heyelan-3: #d8964f;
+    --cig-1: #262546; --cig-2: #4b42a3; --cig-3: #a49cff;
+    --yangin-1: #3f2c18; --yangin-2: #a35512; --yangin-3: #ff8a2a;
+    --kuraklik-1: #3a3416; --kuraklik-2: #8a7119; --kuraklik-3: #f2c530;
+    --tsunami-1: #143836; --tsunami-2: #1c7a73; --tsunami-3: #3fd8ca;
+    --volkan-3: #ff5c95; --iller-3: #e8eef3;
+    --sky: #163049; --sky-2: #24506f; --sky-storm: #1d2832; --sky-fire: #3a2417; --sky-dry: #312a16;
+    --cloud: #c8d3de; --cloud-storm: #3c4955; --ground: #6b5539; --ground-2: #4f3e29; --dry: #7a6342;
+    --grass: #3f7d3a; --tree: #2a6a40; --trunk: #5c3e26; --wall: #d8cbb5; --roof: #b4432c;
+    --water: #2c6fae; --water-2: #4f93cf; --snow: #e3ebf3; --rock: #5d564e; --rock-2: #776f65;
+    --smoke: #5f6973; --lava: #ff6a2e; --flame: #ff9a2e; --flame-2: #ffd95c; --sun: #ffcf4d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b131a; --surface: #131d27; --surface-2: #1a2632; --surface-3: #24323f;
+  --ink: #e8eef3; --ink-2: #a8b7c4; --ink-3: #7f8f9c; --line: #263542;
+  --band: #060b10; --band-ink: #eef3f7; --band-ink-2: #93a5b3; --band-line: rgba(238, 243, 247, .14);
+  --signal: #ffcf4d; --signal-ink: #0b131a; --signal-bg: #352d12; --focus: #79b2ff;
+  --safe: #3cc781; --safe-2: #1f6b43; --safe-bg: #12301f; --danger: #ff6474; --danger-bg: #3b161c;
+  --fact-bg: #2a2412; --fact-line: #4a3f1c; --on-c: #0b131a; --scrim: rgba(0, 0, 0, .62);
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 22px rgba(0, 0, 0, .35); --wm: rgba(232, 238, 243, .5);
+  --sea: #12365a; --sea-deep: #0a2238; --wave: rgba(140, 200, 240, .12); --shallow: #1f5d82;
+  --land-n: #1b252f; --land-n-line: #2b3743; --land: #2a3946; --inland: #26323d; --seam: #0b131a;
+  --edge: #020508; --shade: rgba(0, 0, 0, .5); --outline: rgba(150, 175, 195, .55); --lake: #14406a; --river: #3a8cc0;
+  --grid: #e8eef3; --label: #ffffff; --halo: rgba(8, 14, 20, .92); --label-n: #6f808e; --sea-label: #6cb7e0;
+  --fault: #ff4b3e; --fault-case: rgba(8, 14, 20, .92); --plate: #b892ff;
+  --r-M: #8466e6; --r-E: #17a89b; --r-A: #ef7442; --r-I: #e3ae2a; --r-K: #33a85a; --r-D: #3784dc; --r-G: #de5a88;
+  --deprem-1: #4a2228; --deprem-2: #a3303f; --deprem-3: #ff5468;
+  --sel-1: #18324f; --sel-2: #2c62ad; --sel-3: #5ea4ff;
+  --heyelan-1: #3a2c1e; --heyelan-2: #80562e; --heyelan-3: #d8964f;
+  --cig-1: #262546; --cig-2: #4b42a3; --cig-3: #a49cff;
+  --yangin-1: #3f2c18; --yangin-2: #a35512; --yangin-3: #ff8a2a;
+  --kuraklik-1: #3a3416; --kuraklik-2: #8a7119; --kuraklik-3: #f2c530;
+  --tsunami-1: #143836; --tsunami-2: #1c7a73; --tsunami-3: #3fd8ca;
+  --volkan-3: #ff5c95; --iller-3: #e8eef3;
+  --sky: #163049; --sky-2: #24506f; --sky-storm: #1d2832; --sky-fire: #3a2417; --sky-dry: #312a16;
+  --cloud: #c8d3de; --cloud-storm: #3c4955; --ground: #6b5539; --ground-2: #4f3e29; --dry: #7a6342;
+  --grass: #3f7d3a; --tree: #2a6a40; --trunk: #5c3e26; --wall: #d8cbb5; --roof: #b4432c;
+  --water: #2c6fae; --water-2: #4f93cf; --snow: #e3ebf3; --rock: #5d564e; --rock-2: #776f65;
+  --smoke: #5f6973; --lava: #ff6a2e; --flame: #ff9a2e; --flame-2: #ffd95c; --sun: #ffcf4d;
+  color-scheme: dark;
+}

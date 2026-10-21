@@ -1,0 +1,75 @@
+/* Türkiye Afet Haritası · Temel, üst bant, sahne düzeni ve afet rafı */
+/* ------------------------------------------------------------------ sıfırlama */
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font:14px system-ui,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+
+/* ------------------------------------------------------------------ temel */
+html { font-size: clamp(15px, .5vw + 8.6px, 19px); -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ico { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+#app { min-height: 100%; display: flex; flex-direction: column; }
+
+/* ------------------------------------------------------------------ üst bant */
+.band { background: var(--band); color: var(--band-ink); }
+.band-in {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: .6rem;
+  display: flex; align-items: center; gap: .6rem 1.2rem; flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: .75rem; min-width: 0; }
+.logo { width: 2.6rem; height: 2.6rem; flex: none; }
+.brand h1 { font-family: var(--f-display); font-weight: 400; font-size: 1.4rem; line-height: 1.05; margin: 0; letter-spacing: .01em; }
+.brand h1 b { font-weight: 400; color: var(--signal); }
+.byline { font-size: .8rem; color: var(--band-ink-2); margin-top: .15rem; }
+.byline strong { color: var(--band-ink); font-weight: 600; }
+.modes { margin-left: auto; display: flex; gap: .35rem; flex-wrap: wrap; align-items: center; }
+.modes button {
+  display: inline-flex; align-items: center; gap: .4rem; border: 1.5px solid var(--band-line); background: transparent;
+  color: var(--band-ink); border-radius: 999px; padding: .42rem .85rem; font-weight: 600; font-size: .9rem; cursor: pointer;
+}
+.modes button:hover { border-color: var(--band-ink-2); }
+.modes button[aria-pressed="true"] { background: var(--signal); border-color: var(--signal); color: var(--signal-ink); }
+.modes .ico { width: 1.1em; height: 1.1em; }
+.modes .ibtn { width: 2.3rem; height: 2.3rem; border-radius: 999px; background: transparent; color: var(--band-ink); border: 1.5px solid var(--band-line); box-shadow: none; padding: 0; }
+.modes .ibtn:hover { background: transparent; border-color: var(--band-ink-2); }
+.band-foot .band-in { padding-block: .5rem; font-size: .8rem; color: var(--band-ink-2); justify-content: space-between; }
+.band-foot b { color: var(--signal); }
+
+/* ------------------------------------------------------------------ sahne düzeni */
+.stage {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: .9rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: .9rem;
+}
+.mapcol { display: flex; flex-direction: column; gap: .55rem; min-width: 0; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 1.1rem 1.15rem 1.4rem; min-width: 0; box-shadow: var(--shadow-1); }
+
+/* ------------------------------------------------------------------ afet rafı */
+.rail { display: flex; flex-direction: column; gap: .6rem; min-width: 0; }
+.rail-h { font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); padding: 0 .35rem; }
+.hz-list { display: flex; flex-direction: column; gap: .3rem; }
+.hz {
+  display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); align-items: center; gap: .65rem; padding: .42rem .55rem;
+  border-radius: 14px; border: 2px solid transparent; background: transparent; color: var(--ink); text-align: left; cursor: pointer;
+}
+.hz:hover { background: var(--surface); }
+.hz[aria-pressed="true"] { background: var(--surface); border-color: var(--c); box-shadow: var(--shadow-1); }
+.tile {
+  width: 2.5rem; height: 2.5rem; border-radius: 12px; display: grid; place-items: center; background: var(--c); color: var(--on-c);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .2);
+}
+.tile .ico { width: 1.35rem; height: 1.35rem; stroke-width: 2.2; }
+.tile.multi { color: var(--paper-ink); }
+.tile.multi { background: conic-gradient(from 200deg, var(--r-M), var(--r-E), var(--r-A), var(--r-I), var(--r-K), var(--r-D), var(--r-G), var(--r-M)); }
+.hz .nm { display: block; font-weight: 700; font-size: .95rem; line-height: 1.15; }
+.hz .sub { display: block; font-size: .74rem; color: var(--ink-3); line-height: 1.25; }
+.sos { margin-top: auto; background: var(--danger-bg); border-radius: var(--r-md); padding: .75rem .85rem; font-size: .84rem; line-height: 1.4; }
+.sos .big { display: flex; align-items: center; gap: .45rem; font-family: var(--f-display); font-size: 1.7rem; color: var(--danger); line-height: 1; margin-bottom: .3rem; }
+.sos .big .ico { width: 1.6rem; height: 1.6rem; }

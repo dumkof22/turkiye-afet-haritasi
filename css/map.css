@@ -1,0 +1,194 @@
+/* Türkiye Afet Haritası · Harita sütunu ve harita katmanları */
+/* ------------------------------------------------------------------ harita sütunu */
+.maphead { display: flex; align-items: center; gap: .5rem 1rem; flex-wrap: wrap; }
+.mh-title { min-width: 0; display: flex; align-items: center; gap: .65rem; }
+.mh-title .tile { width: 2.2rem; height: 2.2rem; border-radius: 10px; }
+.mh-title h2 { font-family: var(--f-display); font-weight: 400; font-size: 1.25rem; line-height: 1.1; margin: 0; text-transform: uppercase; }
+.mh-title p { margin: 0; color: var(--ink-3); font-size: .84rem; }
+.search {
+  margin-left: auto; display: flex; align-items: center; gap: .45rem; background: var(--surface); border: 1.5px solid var(--line);
+  border-radius: 999px; padding: .35rem .9rem; color: var(--ink-3);
+}
+.search:focus-within { outline: 3px solid var(--focus); outline-offset: 1px; }
+.search input { border: 0; background: transparent; color: var(--ink); width: 11rem; max-width: 46vw; outline: none; padding: 0; }
+.search input::placeholder { color: var(--ink-3); }
+
+.mapwrap { position: relative; border-radius: var(--r-lg); overflow: hidden; background: var(--sea-deep); border: 1px solid var(--line); min-height: 0; }
+#map { --u: 1; display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+#map.dragging { cursor: grabbing; }
+.mapctl { position: absolute; right: .7rem; top: .7rem; display: flex; flex-direction: column; gap: .4rem; }
+.ibtn {
+  width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border-radius: 12px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); box-shadow: var(--shadow-1); cursor: pointer; padding: 0;
+}
+.ibtn:hover { background: var(--surface-2); }
+.ibtn .ico { width: 1.25rem; height: 1.25rem; }
+.compass { position: absolute; left: .7rem; top: .7rem; width: 3.2rem; height: 3.2rem; pointer-events: none; }
+.cmp-bg { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+.cmp-n { fill: var(--danger); }
+.cmp-s { fill: var(--ink-3); }
+.cmp-t { font: 700 8px var(--f-body); fill: var(--ink); }
+.scalebar { position: absolute; left: .8rem; bottom: .75rem; font-size: .72rem; font-weight: 700; color: var(--ink); pointer-events: none; background: var(--surface); padding: .3rem .5rem .35rem; border-radius: 8px; box-shadow: var(--shadow-1); }
+.scalebar .bar { height: 6px; margin-top: .2rem; border: 2px solid var(--ink); border-top: 0; background: linear-gradient(90deg, var(--ink) 0 50%, transparent 50% 100%); }
+.wm { position: absolute; right: .8rem; bottom: .6rem; font-size: .74rem; font-weight: 600; color: var(--wm); pointer-events: none; letter-spacing: .03em; }
+.tip {
+  position: absolute; left: 0; top: 0; pointer-events: none; background: var(--ink); color: var(--surface); padding: .38rem .65rem;
+  border-radius: 9px; font-size: .84rem; font-weight: 600; white-space: nowrap; transform: translate(-50%, calc(-100% - 14px)); z-index: 5; box-shadow: var(--shadow-1);
+}
+.tip.below { transform: translate(-50%, 18px); }
+.tip small { display: block; font-weight: 400; opacity: .8; font-size: .76rem; }
+.toast {
+  position: absolute; left: 50%; top: .8rem; transform: translateX(-50%); background: var(--surface); color: var(--ink);
+  border-radius: 999px; padding: .4rem .45rem .4rem 1rem; box-shadow: var(--shadow-1); font-size: .86rem; display: flex;
+  align-items: center; gap: .55rem; max-width: calc(100% - 9rem); z-index: 4;
+}
+.toast .ibtn { width: 1.9rem; height: 1.9rem; box-shadow: none; border: 0; background: var(--surface-2); border-radius: 50%; }
+.tlink { border: 0; background: transparent; color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; padding: 0 .15rem; }
+.toast.q { background: var(--signal); color: var(--signal-ink); font-weight: 700; padding-right: 1rem; }
+
+/* ------------------------------------------------------------------ harita katmanları */
+.st-sea { stop-color: var(--sea); }
+.st-sea-deep { stop-color: var(--sea-deep); }
+.sea { fill: url(#gSea); }
+.sea-wave { fill: url(#pWave); pointer-events: none; }
+.wave-p { fill: none; stroke: var(--wave); stroke-width: 1.2; stroke-linecap: round; }
+.land-n { fill: var(--land-n); stroke: var(--land-n-line); stroke-width: 1px; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.coast-halo path { fill: none; stroke: var(--shallow); stroke-linejoin: round; vector-effect: non-scaling-stroke; pointer-events: none; }
+.coast-halo .h1 { stroke-width: 26px; opacity: .3; }
+.coast-halo .h2 { stroke-width: 11px; opacity: .55; }
+.tr-shadow { fill: var(--shade); transform: translate(calc(var(--u) * 6px), calc(var(--u) * 17px)); pointer-events: none; }
+.tr-edge { fill: var(--edge); transform: translate(0, calc(var(--u) * 8px)); pointer-events: none; }
+
+#map { --m1: 90%; --m2: 90%; --m3: 82%; }
+#map:is([data-hz="iller"], [data-hz="volkan"]) { --m1: 78%; --m2: 92%; --m3: 63%; }
+#map[data-hz="none"] { --m1: 93%; --m2: 95%; --m3: 88%; }
+.prov {
+  fill: var(--f, var(--land)); stroke: var(--seam); stroke-width: 1.5px; stroke-linejoin: round; vector-effect: non-scaling-stroke;
+  transition: fill .5s ease, opacity .3s ease; cursor: pointer;
+}
+@supports (fill: color-mix(in oklab, red, blue)) {
+  #map .prov.t1 { fill: color-mix(in oklab, var(--f, var(--land)) var(--m1), #fff); }
+  #map .prov.t2 { fill: color-mix(in oklab, var(--f, var(--land)) var(--m2), #000); }
+  #map .prov.t3 { fill: color-mix(in oklab, var(--f, var(--land)) var(--m3), #fff); }
+}
+#map:is([data-hz="iller"], [data-hz="volkan"]) .prov[data-r="M"] { --f: var(--r-M); }
+#map:is([data-hz="iller"], [data-hz="volkan"]) .prov[data-r="E"] { --f: var(--r-E); }
+#map:is([data-hz="iller"], [data-hz="volkan"]) .prov[data-r="A"] { --f: var(--r-A); }
+#map:is([data-hz="iller"], [data-hz="volkan"]) .prov[data-r="I"] { --f: var(--r-I); }
+#map:is([data-hz="iller"], [data-hz="volkan"]) .prov[data-r="K"] { --f: var(--r-K); }
+#map:is([data-hz="iller"], [data-hz="volkan"]) .prov[data-r="D"] { --f: var(--r-D); }
+#map:is([data-hz="iller"], [data-hz="volkan"]) .prov[data-r="G"] { --f: var(--r-G); }
+#map[data-hz="deprem"] .prov[data-deprem="1"] { --f: var(--deprem-1); }
+#map[data-hz="deprem"] .prov[data-deprem="2"] { --f: var(--deprem-2); }
+#map[data-hz="deprem"] .prov[data-deprem="3"] { --f: var(--deprem-3); }
+#map[data-hz="sel"] .prov[data-sel="1"] { --f: var(--sel-1); }
+#map[data-hz="sel"] .prov[data-sel="2"] { --f: var(--sel-2); }
+#map[data-hz="sel"] .prov[data-sel="3"] { --f: var(--sel-3); }
+#map[data-hz="heyelan"] .prov[data-heyelan="1"] { --f: var(--heyelan-1); }
+#map[data-hz="heyelan"] .prov[data-heyelan="2"] { --f: var(--heyelan-2); }
+#map[data-hz="heyelan"] .prov[data-heyelan="3"] { --f: var(--heyelan-3); }
+#map[data-hz="cig"] .prov[data-cig="1"] { --f: var(--cig-1); }
+#map[data-hz="cig"] .prov[data-cig="2"] { --f: var(--cig-2); }
+#map[data-hz="cig"] .prov[data-cig="3"] { --f: var(--cig-3); }
+#map[data-hz="yangin"] .prov[data-yangin="1"] { --f: var(--yangin-1); }
+#map[data-hz="yangin"] .prov[data-yangin="2"] { --f: var(--yangin-2); }
+#map[data-hz="yangin"] .prov[data-yangin="3"] { --f: var(--yangin-3); }
+#map[data-hz="kuraklik"] .prov[data-kuraklik="1"] { --f: var(--kuraklik-1); }
+#map[data-hz="kuraklik"] .prov[data-kuraklik="2"] { --f: var(--kuraklik-2); }
+#map[data-hz="kuraklik"] .prov[data-kuraklik="3"] { --f: var(--kuraklik-3); }
+#map[data-hz="tsunami"] .prov[data-tsunami="0"] { --f: var(--inland); }
+#map[data-hz="tsunami"] .prov[data-tsunami="1"] { --f: var(--tsunami-1); }
+#map[data-hz="tsunami"] .prov[data-tsunami="2"] { --f: var(--tsunami-2); }
+#map[data-hz="tsunami"] .prov[data-tsunami="3"] { --f: var(--tsunami-3); }
+#map .prov.dim { opacity: .22; }
+#map .prov.q-ans { --f: var(--safe-2) !important; }
+#map .prov.q-ok { --f: var(--safe) !important; }
+#map .prov.q-bad { --f: var(--danger) !important; }
+
+.lift .prov { pointer-events: none; }
+.lift .ls { fill: var(--shade); stroke: none; transform: translate(calc(var(--u) * 2px), calc(var(--u) * 4px)); pointer-events: none; }
+.lift .lp { stroke: var(--ink); stroke-width: 2px; transform: translate(0, calc(var(--u) * -4px)); animation: liftup .18s ease-out; }
+.lift .lp.sel { stroke-width: 3.2px; transform: translate(0, calc(var(--u) * -6px)); }
+@keyframes liftup { from { transform: translate(0, 0); } }
+
+.lakes { fill: var(--lake); stroke: var(--shallow); stroke-width: 1px; vector-effect: non-scaling-stroke; pointer-events: none; }
+.rivers { fill: none; stroke: var(--river); stroke-width: 1.1px; opacity: .7; vector-effect: non-scaling-stroke; pointer-events: none; stroke-linecap: round; stroke-linejoin: round; }
+#map[data-hz="sel"] .rivers { stroke-width: 2.4px; opacity: 1; stroke: var(--sel-3); }
+.tr-outline { fill: none; stroke: var(--outline); stroke-width: 1.3px; vector-effect: non-scaling-stroke; pointer-events: none; stroke-linejoin: round; }
+
+.grid { pointer-events: none; }
+.grid path { fill: none; stroke: var(--grid); stroke-opacity: .16; stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.grid path.key { stroke-opacity: .65; stroke-width: 1.6px; stroke-dasharray: 8 6; }
+.grid text { font-family: var(--f-body); font-weight: 700; font-size: calc(var(--u) * 12px); fill: var(--grid); stroke: var(--halo); stroke-width: calc(var(--u) * 3.2px); paint-order: stroke; stroke-linejoin: round; }
+#map:not(.ov-grid) .grid { display: none; }
+
+.geo-labels { pointer-events: none; }
+.geo-labels text { font-family: var(--f-body); text-anchor: middle; }
+.sea-l { font-size: calc(var(--u) * 15px); font-weight: 600; font-style: italic; letter-spacing: .35em; fill: var(--sea-label); }
+.sea-s { font-size: calc(var(--u) * 11px); letter-spacing: .2em; }
+.cn { font-size: calc(var(--u) * 11px); font-weight: 700; letter-spacing: .16em; fill: var(--label-n); }
+
+.plabels { pointer-events: none; }
+.pl { font-family: var(--f-body); font-weight: 700; fill: var(--label); stroke: var(--halo); stroke-width: calc(var(--u) * 3.6px); stroke-linejoin: round; paint-order: stroke; text-anchor: middle; dominant-baseline: central; }
+.pl.sel { font-weight: 800; }
+#map:not(.ov-labels) .plabels, #map[data-mode="quiz"] .plabels { display: none; }
+
+.fault-c, .fault-l { fill: none; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; pointer-events: none; }
+.fault-c { stroke: var(--fault-case); }
+.fault-l { stroke: var(--fault); }
+.fault-hit { fill: none; stroke: transparent; stroke-width: 18px; vector-effect: non-scaling-stroke; cursor: pointer; pointer-events: stroke; }
+.f-major .fault-c { stroke-width: 7.5px; }
+.f-major .fault-l { stroke-width: 3.8px; }
+.f-minor .fault-c { stroke-width: 5px; }
+.f-minor .fault-l { stroke-width: 2.2px; }
+.f-thrust .fault-l { stroke-dasharray: 9 6; }
+.fault-g:hover .fault-c, .fault-g.hl .fault-c { stroke: var(--signal); }
+.fault-g.hl .fault-l { stroke: var(--ink); }
+.flabel { font-family: var(--f-body); font-weight: 800; font-size: calc(var(--u) * 11px); letter-spacing: .14em; fill: var(--fault); stroke: var(--halo); stroke-width: calc(var(--u) * 3.6px); paint-order: stroke; stroke-linejoin: round; text-anchor: middle; pointer-events: none; }
+.fleader { fill: none; stroke: var(--fault); stroke-width: 1.5px; stroke-dasharray: 4 3; vector-effect: non-scaling-stroke; pointer-events: none; }
+.fdot { fill: var(--fault); stroke: var(--fault-case); stroke-width: 2px; pointer-events: none; }
+#map:not(.ov-faults) .faults { display: none; }
+#map[data-mode="quiz"]:not(.q-faults) .faults { display: none; }
+#map:not([data-mode="explore"]) .fault-hit { pointer-events: none; }
+
+.plates { pointer-events: none; }
+#map:not(.ov-plates) .plates { display: none; }
+.pb { fill: none; stroke: var(--plate); stroke-width: 9px; stroke-opacity: .3; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.parrow { fill: none; stroke: var(--plate); stroke-width: 4.5px; stroke-linecap: round; vector-effect: non-scaling-stroke; stroke-dasharray: 10 8; }
+.parr-h { fill: var(--plate); }
+.plabel { font-family: var(--f-display); font-size: calc(var(--u) * 13px); fill: var(--plate); stroke: var(--halo); stroke-width: calc(var(--u) * 3.8px); paint-order: stroke; stroke-linejoin: round; text-anchor: middle; }
+.plabel-s { font-family: var(--f-body); font-weight: 700; font-size: calc(var(--u) * 10.5px); fill: var(--ink-2); stroke: var(--halo); stroke-width: calc(var(--u) * 3.2px); paint-order: stroke; stroke-linejoin: round; text-anchor: middle; }
+
+.mk { display: none; cursor: pointer; outline: none; }
+#map[data-mode="explore"][data-hz="deprem"] .mk[data-hz="deprem"],
+#map[data-mode="explore"][data-hz="sel"] .mk[data-hz="sel"],
+#map[data-mode="explore"][data-hz="heyelan"] .mk[data-hz="heyelan"],
+#map[data-mode="explore"][data-hz="cig"] .mk[data-hz="cig"],
+#map[data-mode="explore"][data-hz="yangin"] .mk[data-hz="yangin"],
+#map[data-mode="explore"][data-hz="kuraklik"] .mk[data-hz="kuraklik"],
+#map[data-mode="explore"][data-hz="tsunami"] .mk[data-hz="tsunami"],
+#map[data-mode="explore"][data-hz="volkan"] .mk[data-hz="volkan"],
+#map[data-mode="timeline"] .mk.tl-on { display: inline; }
+.mk-s { transform: scale(var(--u)); transition: transform .15s ease; }
+.mk:hover .mk-s, .mk:focus-visible .mk-s { transform: scale(calc(var(--u) * 1.2)); }
+.mk-hit { fill: transparent; }
+.q-sh { fill: var(--shade); }
+.q-dot { fill: var(--deprem-3); stroke: var(--seam); stroke-width: 2.2px; }
+.q-core { fill: var(--seam); }
+.q-yr { font-family: var(--f-body); font-weight: 800; font-size: 12px; fill: var(--label); stroke: var(--halo); stroke-width: 3.4px; paint-order: stroke; stroke-linejoin: round; display: none; }
+#map.z2 .q-yr, .mk.on .q-yr, #map[data-mode="timeline"] .mk.cur .q-yr { display: inline; }
+.pin { fill: var(--c); stroke: var(--seam); stroke-width: 2px; }
+.pin-sh { fill: var(--shade); }
+.pin-i { fill: none; stroke: var(--on-c); stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
+.mk.on .q-dot, .mk.on .pin, #map[data-mode="timeline"] .mk.cur .q-dot { stroke: var(--ink); stroke-width: 3.2px; }
+#map[data-mode="timeline"] .mk.tl-on:not(.cur) { opacity: .55; }
+
+.rip circle { fill: none; stroke: var(--c, var(--deprem-3)); stroke-width: 3px; transform-box: fill-box; transform-origin: center; animation: ripple 2.2s ease-out forwards; }
+.rip circle:nth-child(2) { animation-delay: .35s; }
+.rip circle:nth-child(3) { animation-delay: .7s; }
+@keyframes ripple { from { transform: scale(.3); opacity: 1; } to { transform: scale(4.5); opacity: 0; } }
+.rupture-c { fill: none; stroke: var(--ink); stroke-width: 12px; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; opacity: .85; }
+.rupture { fill: none; stroke: var(--signal); stroke-width: 7px; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.rupture.old { stroke: var(--deprem-2); }
+.gap-seg { fill: none; stroke: var(--danger); stroke-width: 9px; stroke-dasharray: 2 10; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.dlabel { font-family: var(--f-display); font-size: calc(var(--u) * 14px); fill: var(--ink); stroke: var(--signal); stroke-width: calc(var(--u) * 4px); paint-order: stroke; stroke-linejoin: round; text-anchor: middle; }

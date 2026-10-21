@@ -1,0 +1,50 @@
+/* Türkiye Afet Haritası · Pencere: afet çantası, sözlük ve sertifika */
+/* ------------------------------------------------------------------ pencere (dialog) */
+dialog { border: 0; padding: 0; border-radius: var(--r-lg); background: var(--surface); color: var(--ink); width: min(62rem, calc(100vw - 32px)); max-height: calc(100vh - 32px); box-shadow: 0 24px 64px rgba(0, 0, 0, .35); }
+dialog::backdrop { background: var(--scrim); }
+.dlg-in { display: flex; flex-direction: column; max-height: calc(100vh - 32px); }
+.dlg-h { display: flex; align-items: center; gap: .75rem; padding: .9rem 1.1rem; border-bottom: 1px solid var(--line); }
+.dlg-h h2 { font-family: var(--f-display); font-weight: 400; font-size: 1.35rem; margin: 0; flex: 1; line-height: 1.1; text-transform: uppercase; }
+.dlg-b { padding: 1.1rem 1.15rem 1.4rem; overflow: auto; }
+.dlg-b p { margin: 0 0 .8rem; max-width: 70ch; }
+.dlg-b h3 { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); margin: 1.2rem 0 .5rem; }
+.dlg-b a { color: var(--focus); }
+
+.bag-top { display: flex; align-items: center; gap: .8rem 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.bag-vis { display: flex; align-items: center; gap: .5rem; background: var(--surface-2); border-radius: var(--r-md); padding: .55rem .8rem; flex: 1 1 18rem; min-height: 3.4rem; flex-wrap: wrap; }
+.bag-vis > .ico { width: 1.9rem; height: 1.9rem; color: var(--ink-2); }
+.bag-vis .bag-ic { width: 1.7rem; height: 1.7rem; }
+.bag-vis .cnt { font-weight: 800; margin-right: .3rem; }
+.bag-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(7.2rem, 1fr)); gap: .6rem; }
+.item { position: relative; display: flex; flex-direction: column; align-items: center; gap: .35rem; padding: .7rem .45rem .65rem; border-radius: 15px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); font-size: .84rem; font-weight: 700; text-align: center; cursor: pointer; line-height: 1.2; }
+.item:hover { border-color: var(--ink-3); }
+.bag-ic { width: 3rem; height: 3rem; fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.item[aria-pressed="true"] { border-color: var(--signal); background: var(--signal-bg); box-shadow: inset 0 -3px 0 var(--signal); }
+.item .badge { position: absolute; top: .35rem; right: .35rem; width: 1.45rem; height: 1.45rem; border-radius: 50%; display: grid; place-items: center; background: var(--signal); color: var(--signal-ink); }
+.item .badge .ico { width: .9rem; height: .9rem; stroke-width: 3; }
+.item.r-ok { border-color: var(--safe); background: var(--safe-bg); box-shadow: none; }
+.item.r-ok .badge { background: var(--safe); color: var(--on-c); }
+.item.r-bad { border-color: var(--danger); background: var(--danger-bg); box-shadow: none; }
+.item.r-bad .badge { background: var(--danger); color: var(--on-c); }
+.item.r-miss { border-style: dashed; border-color: var(--safe); }
+.item .why { font-weight: 400; font-size: .76rem; color: var(--ink-2); }
+.result { border-radius: var(--r-md); padding: .8rem 1rem; margin-bottom: 1rem; background: var(--surface-2); }
+.result b { font-family: var(--f-display); font-weight: 400; font-size: 1.3rem; }
+
+.gl-search { display: flex; align-items: center; gap: .45rem; border: 2px solid var(--line); border-radius: 999px; padding: .4rem .9rem; margin-bottom: 1rem; color: var(--ink-3); }
+.gl-search input { border: 0; background: transparent; color: var(--ink); outline: none; flex: 1; min-width: 0; }
+.gl-search:focus-within { outline: 3px solid var(--focus); outline-offset: 1px; }
+.gloss { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: .6rem; margin: 0; }
+.gloss div { background: var(--surface-2); border-radius: var(--r-md); padding: .7rem .85rem; }
+.gloss dt { font-weight: 800; margin-bottom: .2rem; }
+.gloss dd { margin: 0; font-size: .9rem; color: var(--ink-2); }
+
+.cert { background: var(--paper); color: var(--paper-ink); border: 14px solid transparent; border-image: repeating-linear-gradient(45deg, var(--signal) 0 14px, var(--paper-ink) 14px 28px) 14; padding: 1.6rem 1.3rem 1.3rem; text-align: center; }
+.cert .t1 { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; }
+.cert h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.8rem; letter-spacing: .03em; margin: .3rem 0 .8rem; color: var(--paper-ink); text-transform: uppercase; }
+.cert .who { font-family: var(--f-display); font-size: 2rem; margin: .5rem 0; line-height: 1.1; overflow-wrap: anywhere; text-transform: uppercase; }
+.cert p { margin: .3rem auto; max-width: 40rem; }
+.cert .rank { display: inline-block; background: var(--signal); color: var(--signal-ink); font-weight: 800; padding: .3rem .9rem; border-radius: 999px; margin: .4rem 0; }
+.cert .sig { margin-top: 1.5rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: .86rem; text-align: left; }
+.cert .sig div { border-top: 1.5px solid var(--paper-ink); padding-top: .3rem; min-width: 9rem; }
+.cert .sig .name { font-family: var(--f-display); font-size: 1.05rem; text-transform: uppercase; }
