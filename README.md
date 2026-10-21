@@ -53,7 +53,8 @@ Yeni bir dosya eklerken `index.html`'deki sıraya dikkat edin: veri dosyaları k
    ```
 
 2. Diğer olaylar: `js/data/week.js` içindeki `label`, `updated`, `lede`, `stats`, `events`, `lessons` ve kaynakları (`WEEK_SRC`) yeni haftaya göre düzenleyin.
-   Her olayın `src` alanına haberin ya da resmî açıklamanın bağlantısını ekleyin.
+   Her olayın `src` alanına resmî açıklamanın bağlantısını ekleyin. Rakamları kurumun kendi açıklamasından (valilik, bakanlık, AFAD, belediye) alın;
+   bağlantı olarak kurumun sitesini ya da açıklamayı aktaran Anadolu Ajansı, DHA veya TRT Haber'i kullanın. Yalnızca tek bir haber sitesinde geçen bilgileri eklemeyin.
 
 ## Kaynaklar
 
@@ -61,7 +62,7 @@ Yeni bir dosya eklerken `index.html`'deki sıraya dikkat edin: veri dosyaları k
 - Deprem bilgileri: AFAD, Kandilli Rasathanesi ve Deprem Araştırma Enstitüsü
 - Fay hatları: MTA diri fay haritası esas alınarak basitleştirildi
 - Diğer bilgiler: AFAD, Meteoroloji Genel Müdürlüğü, Orman Genel Müdürlüğü, DSİ
-- Son 1 Hafta: AFAD Deprem Kataloğu; İstanbul Valiliği, İçişleri Bakanlığı, Çevre, Şehircilik ve İklim Değişikliği Bakanlığı, İBB AKOM ve İSKİ açıklamaları ve bunları aktaran haberler (bağlantılar sitede, her olayın kartında)
+- Son 1 Hafta: AFAD Deprem Kataloğu; İstanbul, Kocaeli, Sakarya, Yalova ve Antalya valilikleri, İçişleri Bakanlığı, Çevre, Şehircilik ve İklim Değişikliği Bakanlığı, AFAD, Meteoroloji Genel Müdürlüğü, İBB AKOM, İSKİ ve Kocaeli Büyükşehir Belediyesi açıklamaları; kurumların kendi sitelerinden ya da onları aktaran Anadolu Ajansı, DHA ve TRT Haber'den (bağlantılar sitede, her olayın kartında)
 
 ## Önemli not
 

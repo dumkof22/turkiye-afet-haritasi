@@ -10,7 +10,7 @@ const PFACT = {
   5: "Kuzey Anadolu Fayı ilin Taşova ilçesinden geçer. Yeşilırmak şehrin içinden akar.",
   6: "Afet ve Acil Durum Yönetimi Başkanlığının (AFAD) merkezi Ankara'dadır.",
   7: "2021'deki Manavgat yangını, ülkemizin en büyük orman yangınlarından biridir. Antalya ani sağanak sellerine de açıktır.",
-  8: "Çoruh Vadisi'nin dik yamaçları heyelan ve sel riskini artırır. Türkiye'nin en yüksek barajı olan Deriner Barajı Artvin'dedir.",
+  8: "Çoruh Vadisi'nin dik yamaçları heyelan ve sel riskini artırır. Türkiye'nin en yüksek barajı olan Yusufeli Barajı (275 m) Artvin'dedir.",
   9: "Büyük Menderes Ovası, faylar arasında çökmüş bir graben ovasıdır. Bu yüzden Aydın'da deprem tehlikesi yüksektir.",
   10: "2025'te Sındırgı'da 6 büyüklüğünün üzerinde iki deprem yaşandı. Kaz Dağları'nın ormanları yangına karşı korunmalıdır.",
   12: "Kuzey Anadolu ve Doğu Anadolu fay hatları, Bingöl'ün Karlıova ilçesinde birleşir. Buraya “Karlıova üçlü eklemi” denir.",
