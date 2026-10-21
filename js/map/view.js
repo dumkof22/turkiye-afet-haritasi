@@ -31,6 +31,7 @@ function applyVB() {
 let flyRAF = 0;
 const stopFly = () => cancelAnimationFrame(flyRAF);
 function flyTo(t, ms = 650) {
+  if (!size.w) return;  // boyut henüz ölçülmedi (ör. #zaman ile açılış): ilk sığdırmayı ResizeObserver yapar
   t = clampVB(t);
   stopFly();
   if (RM.matches || ms <= 0) { S.vb = t; applyVB(); return; }
