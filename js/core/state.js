@@ -5,6 +5,8 @@
 const HZ_ORDER = ["iller", "deprem", "sel", "heyelan", "cig", "yangin", "kuraklik", "tsunami", "volkan"];
 const PROV = {};
 GEO.prov.forEach(p => { PROV[p.id] = p; });
+// Son 1 haftanın olayları da haritadaki olaylara katılır.
+WEEK.events.forEach(e => EVENTS.push({ ...e, wk: true }));
 const EV = {};
 EVENTS.forEach(e => { EV[e.id] = e; [e.px, e.py] = proj(e.lon, e.lat); });
 const BAGI = {};
@@ -28,6 +30,6 @@ const S = {
   ov: { faults: true, plates: false, labels: true, grid: false },
   u: 1, vb: { x: 0, y: 0, w: GEO.w, h: GEO.h },
   tl: { i: 0, playing: false, timer: 0, story: -1 },
-  q: null, bag: null
+  q: null, bag: null, wk: { view: null }
 };
 const size = { w: 0, h: 0 };

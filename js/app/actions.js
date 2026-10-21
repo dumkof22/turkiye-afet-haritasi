@@ -20,6 +20,7 @@ function setMode(m, silent) {
     TL.forEach(e => mkEl[e.id].classList.remove("tl-on", "cur"));
   }
   if (S.mode === "quiz") { clearQuizMarks(); svg.classList.remove("q-faults"); }
+  if (S.mode === "week") weekClear();
   S.mode = m;
   svg.dataset.mode = m;
   $$(".modes [data-mode]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
@@ -27,10 +28,11 @@ function setMode(m, silent) {
   if (m === "explore") { svg.dataset.hz = S.hz; svg.classList.toggle("ov-faults", S.ov.faults); }
   if (m === "timeline") { svg.dataset.hz = "none"; svg.classList.add("ov-faults"); S.tl.i = 0; tlShow(true); }
   if (m === "quiz") { svg.dataset.hz = "iller"; quizStart(); }
+  if (m === "week") { svg.dataset.hz = "week"; setOv("faults", true, true); }
   if (!silent) {
     renderHead(); renderFoot(); renderPanel(); layoutLabels();
     if (m !== "explore") fitTurkey(500);
-    try { history.replaceState(null, "", "#" + (m === "explore" ? S.hz : m === "timeline" ? "zaman" : "yarisma")); } catch (_) { /* yoksay */ }
+    try { history.replaceState(null, "", "#" + (m === "explore" ? S.hz : { timeline: "zaman", quiz: "yarisma", week: "buhafta" }[m])); } catch (_) { /* yoksay */ }
   }
 }
 function setOv(k, on, quiet) {
@@ -52,6 +54,7 @@ function onMarker(id) {
     if (i >= 0) { tlStop(); S.tl.i = i; tlShow(); }
     return;
   }
+  if (S.mode === "week") { weekEvent(id); return; }
   openEvent(id);
 }
 function openEvent(id, o = {}) {

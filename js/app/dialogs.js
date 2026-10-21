@@ -14,9 +14,10 @@ function openGloss() {
 function openAbout() {
   openModal("Hakkında", `<p>Bu etkileşimli harita, ortaokul öğrencilerinin Türkiye'deki doğal afetleri tanıması ve afetlere hazırlıklı olmayı öğrenmesi için <b>Hakan Er</b> tarafından hazırlandı.</p>
 <h3>Neler var?</h3>
-<p>81 il için yedi afet türünde risk karnesi, gerçek olaylar ve yerler, fay hatları ve levha hareketleri, deprem zaman tüneli, KAF domino hikâyesi, bilgi yarışması ve sertifika, afet çantası oyunu ve afet sözlüğü.</p>
+<p>81 il için yedi afet türünde risk karnesi, gerçek olaylar ve yerler, fay hatları ve levha hareketleri, deprem zaman tüneli, KAF domino hikâyesi, bilgi yarışması ve sertifika, afet çantası oyunu, afet sözlüğü ve son 1 haftada yaşanan gerçek afetler (${WEEK.label}).</p>
 <h3>Kaynaklar</h3>
 <p>Harita verisi: Natural Earth (kamu malı). Deprem bilgileri: AFAD ile Kandilli Rasathanesi ve Deprem Araştırma Enstitüsü. Fay hatları, MTA'nın diri fay haritası esas alınarak basitleştirildi. Diğer bilgiler: AFAD, Meteoroloji Genel Müdürlüğü, Orman Genel Müdürlüğü ve DSİ.</p>
+<p>“Son 1 Hafta” bölümü: AFAD Deprem Kataloğu ile İstanbul Valiliği, İçişleri Bakanlığı, Çevre, Şehircilik ve İklim Değişikliği Bakanlığı, İBB AKOM ve İSKİ'nin açıklamaları ve bunları aktaran haberler. Her olayın kaynak bağlantıları, olayın bilgi kartında yer alır.</p>
 <h3>Önemli not</h3>
 <p>Haritadaki risk düzeyleri il geneli için yapılmış, eğitim amaçlı ve yaklaşık değerlendirmelerdir. Fay hatlarının konumu basitleştirilmiştir. Resmî ve ayrıntılı bilgi için AFAD'ın Türkiye Deprem Tehlike Haritası'na ve ilgili kurumlara başvurun.</p>
 <h3>Faydalı bağlantılar</h3>
